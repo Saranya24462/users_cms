@@ -50,11 +50,10 @@ UserService.prototype.find = function (input) {
 
     var user = mongoose.model('users', schema);
 
-    var data = user.findOne({'email': input.email}, function (err, users) {
+    return user.findOne({'email': input.email}, function (err, users) {
         if (err) return handleError(err);
         console.log(users)
     })
-    return data
 }
 
 
@@ -68,11 +67,10 @@ UserService.prototype.getUsers = function (input) {
 
     var getData = mongoose.model('users', schema);
 
-    var data = getData.find({'createdBy': input.username}, function (err, results) {
+    return getData.find({'createdBy': input.username}, function (err, results) {
         if (err) return handleError(err);
         console.log(results)
     })
-    return data
 }
 
 
@@ -86,12 +84,10 @@ UserService.prototype.findAdmin = function (input) {
 
     var users = mongoose.model('users', schema);
 
-    var data = users.findOne({'username': input.createdBy}, {'role': 1, '_id': 0}, function (err, result) {
+    return users.findOne({'username': input.createdBy}, {'role': 1, '_id': 0}, function (err, result) {
         if (err) return handleError(err);
         console.log(result)
     })
-    console.log("data", data)
-    return data
 }
 UserService.prototype.insertStaff = function (input) {
 
